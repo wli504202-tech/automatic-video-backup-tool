@@ -1,0 +1,10 @@
+{
+  "name": "com.ahyoo.video_backup",
+  "description": "阿柚自動影片備份 Native Messaging Host v1.0 (Windows x64)",
+  "path": "C:\\Users\\<你的帳號>\\AppData\\Local\\Programs\\AhYooVideoBackup\\AhYooNativeHost.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://REPLACE_WITH_YOUR_EXTENSION_ID/"
+  ],
+  "_comment": "install.bat 會自動產生正確路徑的 manifest 並寫入登錄檔；此檔僅為範例（Windows x64 安裝位置）。"
+}

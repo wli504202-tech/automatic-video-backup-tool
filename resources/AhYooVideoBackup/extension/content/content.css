@@ -1,0 +1,15 @@
+/* 浮動 UI 容器（Shadow DOM 宿主）：只負責定位，樣式在 shadow root 內，避免被網站樣式污染 */
+#ahyoo-backup-host {
+  position: fixed;
+  top: 84px;
+  right: 20px;
+  z-index: 2147483600;
+  pointer-events: auto;
+}
+#ahyoo-backup-host::part(panel),
+#ahyoo-backup-host > * {
+  pointer-events: auto;
+}
+@media (max-width: 720px) {
+  #ahyoo-backup-host { top: 64px; right: 10px; }
+}

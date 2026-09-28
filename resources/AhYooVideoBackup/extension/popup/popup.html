@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>阿柚自動影片備份</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+          <rect x="1" y="1" width="30" height="30" rx="9" fill="#35D07F"></rect>
+          <path d="M13 10.5 L22 16 L13 21.5 Z" fill="#08120C"></path>
+          <path d="M9 22 L12 10 L15 22" stroke="#08120C" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+        </svg>
+        <div>
+          <div class="name">阿柚自動影片備份</div>
+          <div class="sub">AHYOO VIDEO BACKUP</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="status-line">
+        <span id="dot" class="dot on"></span>
+        <span id="statusText">使用中...</span>
+      </div>
+      <div class="version">Version v1.0 · Windows x64 (64-bit)</div>
+      <label class="switch-row">
+        <span>啟用擴充功能</span>
+        <span class="switch"><input type="checkbox" id="enabled" /><i></i></span>
+      </label>
+    </section>
+
+    <section class="card">
+      <div class="card-title">已下載</div>
+      <div class="stats">
+        <div class="stat"><div class="k">影片</div><div class="v" id="videoCount">0</div></div>
+        <div class="stat"><div class="k">音訊</div><div class="v" id="audioCount">0</div></div>
+        <div class="stat"><div class="k">失敗</div><div class="v warn" id="failedCount">0</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="conn">
+        <span id="connDot" class="dot off"></span>
+        <span id="connText">Desktop Offline</span>
+        <button class="ghost" id="connectBtn">連線</button>
+      </div>
+      <div class="quality">
+        <span>下載畫質</span>
+        <select id="quality">
+          <option value="1080p">1080p</option>
+          <option value="720p">720p</option>
+          <option value="480p">480p</option>
+          <option value="240p">240p</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <button class="row-btn" id="settingsBtn"><span>⚙</span> 設定</button>
+    <button class="row-btn danger" id="resetBtn"><span>↻</span> 重置</button>
+
+    <div class="footer">請只保存你擁有或已獲授權的內容</div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

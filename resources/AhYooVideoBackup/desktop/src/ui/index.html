@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>阿柚自動影片備份 v1.0</title>
+<link rel="stylesheet" href="app.css" />
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <img src="logo.png" alt="AHYOO" width="34" height="34" />
+      <div><div class="b1">阿柚自動影片備份</div><div class="b2">AHYOO BACKUP</div></div>
+    </div>
+    <nav>
+      <button class="nav active" data-page="dashboard"><span class="i">▦</span> 首頁</button>
+      <button class="nav" data-page="youtube"><span class="dot" id="ytDot"></span> YouTube</button>
+      <button class="nav" data-page="tiktok"><span class="dot" id="ttDot"></span> TikTok</button>
+      <button class="nav" data-page="queue"><span class="i">⇣</span> 下載佇列</button>
+      <button class="nav" data-page="history"><span class="i">🗂</span> 下載紀錄</button>
+      <button class="nav" data-page="system"><span class="i">⚙</span> 系統</button>
+      <button class="nav" data-page="about"><span class="i">ℹ</span> 關於</button>
+    </nav>
+    <div class="side-foot">
+      <div class="conn"><span class="dot" id="extDot"></span><span id="extText">Extension: 未連線</span></div>
+      <div class="ver">v1.0</div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div id="pageTitle">首頁</div>
+      <div class="actions">
+        <button class="ghost" id="pauseAll">暫停全部</button>
+        <button class="ghost" id="resumeAll">恢復全部</button>
+      </div>
+    </header>
+
+    <section class="page active" id="p-dashboard">
+      <div class="grid4">
+        <div class="card stat"><div class="k">今日影片</div><div class="v" id="dTodayVideo">0</div></div>
+        <div class="card stat"><div class="k">今日音訊</div><div class="v" id="dTodayAudio">0</div></div>
+        <div class="card stat"><div class="k">總容量</div><div class="v" id="dTotalSize">0 B</div></div>
+        <div class="card stat"><div class="k">狀態</div><div class="v ok" id="dStatus">🟢 正常</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">自動化影片備份</div>
+        <div class="row"><div><div class="t">啟動 YouTube 自動備份影片模式</div><div class="d">偵測 ON / 自動下載 OFF（需明確授權內容）</div></div>
+          <label class="switch"><input type="checkbox" id="swYoutube" /><i></i></label></div>
+        <div class="row"><div><div class="t">啟動 TikTok 自動備份影片模式</div><div class="d">偵測 ON / 自動下載 OFF</div></div>
+          <label class="switch"><input type="checkbox" id="swTiktok" /><i></i></label></div>
+      </div>
+      <div class="card">
+        <div class="card-title">未完成任務 / Crash Recovery</div>
+        <div id="recovery" class="d">沒有未完成的下載任務。</div>
+      </div>
+    </section>
+
+    <section class="page" id="p-youtube">
+      <div class="split">
+        <div class="card player">
+          <div class="card-title">YouTube 播放器</div>
+          <div class="url-row">
+            <input id="ytUrl" type="text" placeholder="https://www.youtube.com/watch?v=..." spellcheck="false" />
+            <button class="primary" id="ytLoad">載入</button>
+          </div>
+          <div class="frame yt"><iframe id="ytFrame" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        </div>
+        <div class="card">
+          <div class="card-title">備份此影片</div>
+          <div class="kv"><span>畫質</span>
+            <select id="ytQuality"><option>1080p</option><option>720p</option><option>480p</option><option>240p</option></select></div>
+          <div class="kv"><span>模式</span><b id="ytMode">-</b></div>
+          <div class="btns">
+            <button class="primary" id="ytVideo">下載影片</button>
+            <button class="ghost" id="ytAudio">下載音訊</button>
+          </div>
+          <div class="hint" id="ytHint">請只保存你擁有或已獲授權的內容。</div>
+          <div class="row"><div><div class="t">YouTube 自動備份</div></div>
+            <label class="switch"><input type="checkbox" id="swYoutube2" /><i></i></label></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="p-tiktok">
+      <div class="split">
+        <div class="card player">
+          <div class="card-title">TikTok 播放器</div>
+          <div class="url-row">
+            <input id="ttUrl" type="text" placeholder="https://www.tiktok.com/@user/video/123..." spellcheck="false" />
+            <button class="primary" id="ttLoad">載入</button>
+          </div>
+          <div class="frame tt"><iframe id="ttFrame" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+        </div>
+        <div class="card">
+          <div class="card-title">備份此影片</div>
+          <div class="kv"><span>畫質</span>
+            <select id="ttQuality"><option>1080p</option><option>720p</option><option>480p</option><option>240p</option></select></div>
+          <div class="btns">
+            <button class="primary" id="ttVideo">下載影片</button>
+            <button class="ghost" id="ttAudio">下載音訊</button>
+          </div>
+          <div class="hint" id="ttHint">TikTok 僅支援公開且允許保存的內容。</div>
+          <div class="row"><div><div class="t">TikTok 自動備份</div></div>
+            <label class="switch"><input type="checkbox" id="swTiktok2" /><i></i></label></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="p-queue">
+      <div class="card">
+        <div class="card-title">Download Queue</div>
+        <div id="queueList" class="list"><div class="empty">佇列是空的</div></div>
+      </div>
+    </section>
+
+    <section class="page" id="p-history">
+      <div class="card">
+        <div class="toolbar">
+          <input id="search" type="text" placeholder="搜尋影片名稱" spellcheck="false" />
+          <select id="filter"><option value="all">全部</option><option value="video">影片</option><option value="audio">音訊</option></select>
+          <select id="sort"><option value="newest">最新</option><option value="oldest">最舊</option><option value="size">檔案大小</option></select>
+        </div>
+        <div id="historyList" class="list"><div class="empty">尚無下載紀錄</div></div>
+      </div>
+    </section>
+
+    <section class="page" id="p-system">
+      <div class="card">
+        <div class="card-title">系統 · 自動化影片備份</div>
+        <div class="kv"><span>狀態</span><b id="sysStatus">🟢 正常運作</b></div>
+        <div class="kv"><span>Extension</span><b id="sysExt">Disconnected</b></div>
+        <div class="kv"><span>Background Service</span><b id="sysBg">Running</b></div>
+        <div class="kv"><span>下載位置</span><b id="sysDir">-</b></div>
+        <div class="kv"><span>可用空間</span><b id="sysFree">-</b></div>
+        <div class="kv"><span>解析元件 yt-dlp</span><b id="sysYtdlp">-</b></div>
+        <div class="kv"><span>ffmpeg（轉檔）</span><b id="sysFfmpeg">-</b></div>
+        <div class="kv"><span>架構</span><b id="sysArch">-</b></div>
+        <div class="kv"><span>版本</span><b>v1.0</b></div>
+        <div class="btns"><button class="ghost" id="pickDir">設置下載位置</button><button class="ghost" id="openDir">開啟下載資料夾</button></div>
+      </div>
+      <div class="card">
+        <div class="card-title">設定</div>
+        <div class="row"><div><div class="t">通知</div></div><label class="switch"><input type="checkbox" id="swNotify" /><i></i></label></div>
+        <div class="row"><div><div class="t">影片抓取</div></div><label class="switch"><input type="checkbox" id="swDetect" /><i></i></label></div>
+        <div class="row"><div><div class="t">重啟自動開啟</div><div class="d">Windows 官方 Run 機制</div></div><label class="switch"><input type="checkbox" id="swAutoStart" /><i></i></label></div>
+        <div class="row"><div><div class="t">下載模式</div></div>
+          <select id="downloadMode"><option value="ask">每次都要訪問下載位置</option><option value="direct">直接下載</option></select></div>
+        <div class="row"><div><div class="t">預設畫質</div></div>
+          <select id="videoQuality"><option>1080p</option><option>720p</option><option>480p</option><option>240p</option></select></div>
+        <div class="row"><div><div class="t">同時下載數</div></div>
+          <select id="maxConcurrent"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+        <div class="row"><div><div class="t">檔案衝突</div></div>
+          <select id="conflictPolicy"><option value="copy">建立副本</option><option value="overwrite">覆蓋</option><option value="cancel">取消</option></select></div>
+      </div>
+      <div class="card danger-card">
+        <div class="card-title">↻ 重置</div>
+        <div class="d">清除設定與下載紀錄，可選擇保留影片 / 音訊檔案。</div>
+        <button class="danger" id="openReset">重置</button>
+      </div>
+      <div class="card">
+        <div class="card-title">日誌</div>
+        <pre id="logs" class="logs">載入中...</pre>
+      </div>
+    </section>
+
+    <section class="page" id="p-about">
+      <div class="card">
+        <div class="kv"><span>創作者</span><b>阿柚 ah yoo~</b></div>
+        <div class="kv"><span>製作者</span><b>arena AI</b></div>
+        <div class="kv"><span>版本號</span><b>v1.0</b></div>
+        <div class="kv"><span>出生時間</span><b id="birth">2026/09/28</b></div>
+        <div class="kv"><span>已運行</span><b id="uptime">計算中...</b></div>
+      </div>
+      <div class="card story">
+        <p>這個工具最初是因為一個很簡單的想法而開始。</p>
+        <p>有時候，我們會遇到自己很喜歡的影片或創作者內容，但影片可能因為各種原因被下架、刪除或停止公開。</p>
+        <p>因此，我想製作一個簡單的工具，讓使用者可以在符合平台規則與內容授權的前提下，將自己有權保存的影片整理並備份到自己的電腦。</p>
+        <p>它不是一個複雜的平台，而是一個專注於「整理、備份與管理」的小工具。</p>
+        <p>希望它可以讓重要的合法內容更容易被保存與管理。</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="resetOverlay">
+  <div class="modal">
+    <h2>確定重置嗎？</h2>
+    <div class="checks">
+      <label><input type="checkbox" id="keepVideos" /> 保留影片</label>
+      <label><input type="checkbox" id="keepAudio" /> 保留音訊</label>
+    </div>
+    <div class="hr"></div>
+    <div class="warn-title">《重置後的後果》</div>
+    <p>重置後你的電腦可能會暫時變慢，因為系統可能需要在背景清理大量已下載的影片與音訊檔案。</p>
+    <p>如果勾選保留影片，影片不會刪除。如果勾選保留音訊，音訊不會刪除。</p>
+    <p>設定也會恢復成預設值。</p>
+    <div class="progress" id="resetProgress"></div>
+    <div class="modal-actions"><button class="danger" id="confirmReset">確定</button><button class="ghost" id="cancelReset">取消</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

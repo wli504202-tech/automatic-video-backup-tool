@@ -1,0 +1,82 @@
+:root {
+  --bg: #0B0E13;
+  --panel: rgba(15,18,24,0.88);
+  --line: rgba(255,255,255,0.12);
+  --green: #35D07F;
+  --red: #FF4D5F;
+  --text: #FFFFFF;
+  --muted: #B7BEC9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 380px; height: 520px;
+  background: radial-gradient(120% 90% at 50% 0%, #131A22 0%, #0B0E13 60%);
+  color: var(--text);
+  font-family: "Segoe UI", "Microsoft JhengHei", system-ui, sans-serif;
+  overflow: hidden;
+}
+.wrap { padding: 18px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.logo { display: flex; align-items: center; gap: 11px; }
+.name { font-size: 15px; font-weight: 650; letter-spacing: .4px; }
+.sub { font-size: 10px; color: var(--muted); letter-spacing: 2px; }
+.card {
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.34);
+}
+.card-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 10px; }
+.status-line { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: #5a626d; display: inline-block; }
+.dot.on { background: var(--green); box-shadow: 0 0 0 4px rgba(53,208,127,.16); }
+.dot.off { background: var(--red); box-shadow: 0 0 0 4px rgba(255,77,95,.14); }
+.version { font-size: 11px; color: var(--muted); margin-top: 6px; }
+.switch-row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 13px; }
+.switch { position: relative; width: 44px; height: 24px; display: inline-block; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch i {
+  position: absolute; inset: 0; border-radius: 99px;
+  background: rgba(255,255,255,.14); transition: .22s; cursor: pointer;
+}
+.switch i::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+  border-radius: 50%; background: #E8ECF1; transition: .22s;
+}
+.switch input:checked + i { background: var(--green); }
+.switch input:checked + i::after { transform: translateX(20px); background: #08120C; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.stat { background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 12px; padding: 10px; text-align: center; }
+.stat .k { font-size: 11px; color: var(--muted); }
+.stat .v { font-size: 20px; font-weight: 700; margin-top: 3px; }
+.stat .v.warn { color: var(--red); }
+.conn { display: flex; align-items: center; gap: 9px; font-size: 13px; }
+.conn button { margin-left: auto; }
+.ghost {
+  background: rgba(255,255,255,.06); color: var(--text); border: 1px solid var(--line);
+  border-radius: 10px; padding: 5px 12px; font-size: 12px; cursor: pointer; transition: .18s;
+}
+.ghost:hover { background: rgba(255,255,255,.13); }
+.quality { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 13px; }
+select {
+  background: rgba(255,255,255,.06); color: var(--text); border: 1px solid var(--line);
+  border-radius: 10px; padding: 6px 10px; font-size: 12px; outline: none;
+}
+.divider { height: 1px; background: var(--line); margin: 2px 0; }
+.row-btn {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  padding: 12px 14px; color: var(--text); font-size: 13.5px; cursor: pointer; transition: .18s;
+}
+.row-btn:hover { background: rgba(255,255,255,.1); transform: translateY(-1px); }
+.row-btn.danger { color: var(--red); }
+.row-btn.danger:hover { background: rgba(255,77,95,.12); }
+.footer { margin-top: auto; text-align: center; font-size: 10.5px; color: #6f7784; }
+.toast {
+  position: fixed; left: 50%; bottom: 16px; transform: translate(-50%, 20px);
+  background: rgba(15,18,24,.96); border: 1px solid var(--line); border-radius: 12px;
+  padding: 9px 14px; font-size: 12.5px; opacity: 0; transition: .25s; pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.err { border-color: rgba(255,77,95,.5); color: #FFB4BC; }

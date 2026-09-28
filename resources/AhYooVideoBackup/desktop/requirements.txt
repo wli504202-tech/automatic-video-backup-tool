@@ -1,0 +1,9 @@
+# 阿柚自動影片備份 - Desktop App 依賴
+# 最終使用者不需要安裝 Python：打包.exe.bat 會用 PyInstaller 產生獨立 EXE。
+# 目標平台：Windows 10/11 64-bit (x64)。請使用 64-bit Python（檔名含 amd64）打包，
+# PyInstaller 產生的 EXE 位元數會跟隨當前 Python 直譯器。
+pywebview==5.3.2 ; sys_platform == "win32"
+pystray==0.19.5
+Pillow==10.4.0
+yt-dlp>=2024.8.6
+pyinstaller==6.10.0 ; sys_platform == "win32"

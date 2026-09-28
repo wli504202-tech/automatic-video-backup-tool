@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>阿柚自動影片備份 - 設定</title>
+<link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" width="28" height="28"><rect x="1" y="1" width="30" height="30" rx="9" fill="#35D07F"></rect><path d="M13 10.5 L22 16 L13 21.5 Z" fill="#08120C"></path></svg>
+      <div><div class="b1">阿柚自動影片備份</div><div class="b2">設定 · v1.0</div></div>
+    </div>
+    <nav>
+      <button class="nav active" data-page="general">⚙ 一般</button>
+      <button class="nav" data-page="download">⭳ 下載</button>
+      <button class="nav" data-page="platform">▶ 平台</button>
+      <button class="nav" data-page="reset">↻ 重置</button>
+      <button class="nav" data-page="about">ℹ 關於</button>
+    </nav>
+    <div class="conn-box">
+      <span id="connDot" class="dot off"></span><span id="connText">Desktop Offline</span>
+    </div>
+  </aside>
+
+  <main>
+    <section class="page active" id="page-general">
+      <h1>一般</h1>
+      <div class="card">
+        <div class="row"><div><div class="t">通知</div><div class="d">下載完成 / 失敗時顯示系統通知</div></div>
+          <label class="switch"><input type="checkbox" id="notifications" /><i></i></label></div>
+        <div class="row"><div><div class="t">影片抓取</div><div class="d">關閉後 Extension 不會主動分析目前頁面的影片</div></div>
+          <label class="switch"><input type="checkbox" id="videoDetection" /><i></i></label></div>
+        <div class="row"><div><div class="t">重啟自動開啟</div><div class="d">Windows 啟動後自動於系統列執行 Desktop App（使用官方 Run 機制）</div></div>
+          <label class="switch"><input type="checkbox" id="autoStart" /><i></i></label></div>
+        <div class="row"><div><div class="t">Debug Mode</div><div class="d">於 Console 顯示偵測 / 連線 / 佇列除錯資訊（正式版預設關閉）</div></div>
+          <label class="switch"><input type="checkbox" id="debugMode" /><i></i></label></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-download">
+      <h1>下載</h1>
+      <div class="card">
+        <div class="t">下載模式</div>
+        <label class="radio"><input type="radio" name="mode" value="ask" /><span>每次都要訪問下載位置</span></label>
+        <label class="radio"><input type="radio" name="mode" value="direct" /><span>直接下載到指定資料夾</span></label>
+        <div class="path-row">
+          <input type="text" id="downloadDirectory" placeholder="D:\VideoBackup" spellcheck="false" />
+          <button class="ghost" id="pickDir">設置下載位置</button>
+        </div>
+        <div class="d">Desktop App 會在此位置自動建立 <code>video\</code> 與 <code>audio\</code> 資料夾。</div>
+      </div>
+      <div class="card">
+        <div class="row"><div><div class="t">影片畫質</div><div class="d">預設 720p</div></div>
+          <select id="videoQuality"><option>1080p</option><option>720p</option><option>480p</option><option>240p</option></select></div>
+        <div class="row"><div><div class="t">同時下載數</div><div class="d">避免過度消耗網路與 CPU</div></div>
+          <select id="maxConcurrent"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-platform">
+      <h1>平台自動備份</h1>
+      <div class="card">
+        <div class="row"><div><div class="t">啟動 YouTube 自動備份影片模式</div><div class="d">僅偵測；自動下載預設關閉</div></div>
+          <label class="switch"><input type="checkbox" id="youtubeBackup" /><i></i></label></div>
+        <div class="row"><div><div class="t">啟動 TikTok 自動備份影片模式</div><div class="d">僅偵測；自動下載預設關閉</div></div>
+          <label class="switch"><input type="checkbox" id="tiktokBackup" /><i></i></label></div>
+        <div class="d">Instagram 只支援明確開放的公開影片頁；無法取得時會顯示原因，不會嘗試繞過平台限制。</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-reset">
+      <h1>重置</h1>
+      <div class="card danger-card">
+        <div class="t">↻ 重置</div>
+        <div class="d">清除設定、下載紀錄，並可選擇是否保留已下載的影片 / 音訊。</div>
+        <button class="danger" id="openReset">重置</button>
+      </div>
+    </section>
+
+    <section class="page" id="page-about">
+      <h1>關於</h1>
+      <div class="card">
+        <div class="kv"><span>創作者</span><b>阿柚 ah yoo~</b></div>
+        <div class="kv"><span>製作者</span><b>arena AI</b></div>
+        <div class="kv"><span>版本號</span><b>v1.0</b></div>
+        <div class="kv"><span>出生時間</span><b>2026/09/28</b></div>
+        <div class="kv"><span>Desktop App</span><b>Windows 10/11 64-bit (x64)</b></div>
+      </div>
+      <div class="card story">
+        <p>這個工具最初是因為一個很簡單的想法而開始。</p>
+        <p>有時候，我們會遇到自己很喜歡的影片或創作者內容，但影片可能因為各種原因被下架、刪除或停止公開。</p>
+        <p>因此，我想製作一個簡單的工具，讓使用者可以在符合平台規則與內容授權的前提下，將自己有權保存的影片整理並備份到自己的電腦。</p>
+        <p>它不是一個複雜的平台，而是一個專注於「整理、備份與管理」的小工具。</p>
+        <p>希望它可以讓重要的合法內容更容易被保存與管理。</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="resetOverlay">
+  <div class="modal">
+    <h2>確定重置嗎？</h2>
+    <div class="checks">
+      <label><input type="checkbox" id="keepVideos" /> 保留影片</label>
+      <label><input type="checkbox" id="keepAudio" /> 保留音訊</label>
+    </div>
+    <div class="hr"></div>
+    <div class="warn-title">《重置後的後果》</div>
+    <p>重置後你的電腦可能會暫時變慢，因為系統可能需要在背景清理大量已下載的影片與音訊檔案。</p>
+    <p>如果勾選保留影片，影片不會刪除。如果勾選保留音訊，音訊不會刪除。</p>
+    <p>設定也會恢復成預設值。</p>
+    <div class="progress" id="resetProgress"></div>
+    <div class="modal-actions">
+      <button class="danger" id="confirmReset">確定</button>
+      <button class="ghost" id="cancelReset">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="settings.js"></script>
+</body>
+</html>

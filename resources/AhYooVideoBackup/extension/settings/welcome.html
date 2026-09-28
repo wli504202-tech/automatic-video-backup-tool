@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>歡迎使用 阿柚自動影片備份</title>
+<link rel="stylesheet" href="settings.css" />
+<style>
+  body { display:flex; align-items:center; justify-content:center; }
+  .welcome { width:560px; text-align:center; background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:40px; box-shadow:0 30px 70px rgba(0,0,0,.5); }
+  .welcome h1 { font-size:26px; margin-bottom:8px; }
+  .welcome p { color:#C9D0DA; font-size:14px; line-height:2; }
+  .steps { text-align:left; margin:22px auto; max-width:420px; color:#B7BEC9; font-size:13.5px; line-height:2.1; }
+  .cta { background:#35D07F; color:#08120C; border:0; border-radius:12px; padding:13px 28px; font-size:14.5px; font-weight:650; cursor:pointer; margin-top:10px; }
+  .cta:hover { background:#41e08c; }
+</style>
+</head>
+<body>
+  <div class="welcome">
+    <svg viewBox="0 0 32 32" width="56" height="56"><rect x="1" y="1" width="30" height="30" rx="9" fill="#35D07F"></rect><path d="M13 10.5 L22 16 L13 21.5 Z" fill="#08120C"></path></svg>
+    <h1>歡迎使用<br />阿柚自動影片備份</h1>
+    <p>請先開啟 Desktop App（AhYooVideoBackup.exe，64-bit / x64）。</p>
+    <div class="steps">
+      1. 設定下載位置<br />
+      2. 選擇是否啟用通知<br />
+      3. 選擇是否啟用影片抓取<br />
+      4. 選擇是否開機啟動<br />
+      5. 完成
+    </div>
+    <p style="font-size:12.5px">本工具僅供備份你擁有或已獲得保存授權的內容。</p>
+    <button class="cta" id="start">開始設定</button>
+  </div>
+  <script>
+    document.getElementById("start").addEventListener("click", () => {
+      chrome.runtime.openOptionsPage();
+    });
+  </script>
+</body>
+</html>

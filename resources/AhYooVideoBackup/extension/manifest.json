@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "阿柚自動影片備份",
+  "short_name": "阿柚備份",
+  "version": "1.0",
+  "description": "在符合平台規則與內容授權的前提下，偵測並備份你有權保存的影片 / 音訊到自己的電腦（需搭配 Windows 64-bit Desktop App）。",
+  "minimum_chrome_version": "114",
+  "permissions": [
+    "storage",
+    "notifications",
+    "nativeMessaging",
+    "downloads",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://*.youtube.com/*",
+    "https://*.youtube-nocookie.com/*",
+    "https://*.tiktok.com/*",
+    "https://*.instagram.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "阿柚自動影片備份",
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "settings/settings.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*",
+        "https://www.tiktok.com/*",
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "adapters/base.js",
+        "adapters/youtube.js",
+        "adapters/tiktok.js",
+        "adapters/instagram.js",
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}
